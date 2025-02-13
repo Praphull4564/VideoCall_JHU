@@ -2,53 +2,115 @@
 <html>
 <head>
     <title>AAO MITRO BAAT KRE</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+    <style>  
+
+    #root {
+        width: 97vw;
+        height: 50vh;
+    }
+
+    /* Remove the outline from the video embed */
+    #root video {
+        outline: none;
+    }
+
+    .back-to-dashboard {
+        bottom: 20px;
+        left: 20px;
+        display: flex;
+        
+    }
+    
+    
+    
+
+    body {
+      /* background-image: url('/images/doodle.svg'); */
+      margin: 0;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(to right, #DAE6ED, #DAE6ED);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--primary-bg);
+      color: var(--text-primary);
+      padding-top: 50px;
+    }
+    #root {
+            width: 100vw;
+            height: 50vh;
+        }
+
+        /* Remove the outline from the video embed */
+        #root video {
+            outline: none;
+        }
+
+        
+
+    .logo {
+    position: sticky;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10rem;
+    z-index: -1;
+    }
+        </style> 
 </head>
 <body>
+  
+  <div >
+    <a href="/index.html"><img src="/images/Logo.png" alt="Logo" class="logo"></a>
+  </div>
+  <div>
     <div id="root"></div>
-    <div class="back-to-join">
-        <a href="{{ url_for('join') }}" style="text-decoration: none;">
-            <button>Back to Join Page</button>
-        </a>
+
+    <div style="display: flexbox; align-items: center;">
+      <a href="{{ url_for('join') }}" style="text-decoration: none; ">
+          <button class="back-to-join" style="margin-top: 5rem; padding: 10px 20px; align-items: center; gap: 0.5rem; border: 0.20rem solid rgba(255, 255, 255); text-decoration: none; color: black; padding: 0.5rem 1rem; border-radius: 50px; cursor: pointer; margin-left: 47%;">Back to Join Page</button>
+      </a>
     </div>
+  </div>
 
-    <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
-    <script>
-        window.onload = function () {
-            function getUrlParams(url) {
-                let urlStr = url.split('?')[1];
-                const urlSearchParams = new URLSearchParams(urlStr);
-                return Object.fromEntries(urlSearchParams.entries());
-            }
+  <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+  <script>
+      window.onload = function () {
+          function getUrlParams(url) {
+              let urlStr = url.split('?')[1];
+              const urlSearchParams = new URLSearchParams(urlStr);
+              return Object.fromEntries(urlSearchParams.entries());
+          }
 
-            const roomID = "{{ room_id }}";
-            const userID = Math.floor(Math.random() * 10000) + "";
-            const userName = "Guest_" + userID;
-            const appID = 269198202;
-            const serverSecret = "24f601420acd468676aa5b0bb8ab0a6a";
-            const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
+          const roomID = "{{ room_id }}";
+          const userID = Math.floor(Math.random() * 10000) + "";
+          const userName = "Guest_" + userID;
+          const appID = 269198202;
+          const serverSecret = "24f601420acd468676aa5b0bb8ab0a6a";
+          const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
 
-            const zp = ZegoUIKitPrebuilt.create(kitToken);
-            zp.joinRoom({
-                container: document.querySelector("#root"),
-                sharedLinks: [{
-                    name: 'Personal link',
-                    url: window.location.protocol + '//' + window.location.host + window.location.pathname,
-                }],
-                scenario: { mode: ZegoUIKitPrebuilt.VideoConference },
-                turnOnMicrophoneWhenJoining: true,
-                turnOnCameraWhenJoining: true,
-                showMyCameraToggleButton: true,
-                showMyMicrophoneToggleButton: true,
-                showAudioVideoSettingsButton: true,
-                showScreenSharingButton: true,
-                showTextChat: true,
-                showUserList: true,
-                maxUsers: 10,
-                layout: "Auto",
-                showLayoutButton: false,
-            });
-        }
+          const zp = ZegoUIKitPrebuilt.create(kitToken);
+          zp.joinRoom({
+              container: document.querySelector("#root"),
+              sharedLinks: [{
+                  name: 'Personal link',
+                  url: window.location.protocol + '//' + window.location.host + window.location.pathname,
+              }],
+              scenario: { mode: ZegoUIKitPrebuilt.VideoConference },
+              turnOnMicrophoneWhenJoining: true,
+              turnOnCameraWhenJoining: true,
+              showMyCameraToggleButton: true,
+              showMyMicrophoneToggleButton: true,
+              showAudioVideoSettingsButton: true,
+              showScreenSharingButton: true,
+              showTextChat: true,
+              showUserList: true,
+              maxUsers: 10,
+              layout: "Auto",
+              showLayoutButton: false,
+          });
+      }
     </script>
 </body>
 </html>
